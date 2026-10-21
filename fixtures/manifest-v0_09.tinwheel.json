@@ -1,0 +1,30 @@
+{
+  "schema_version": "0.09",
+  "venture_id": "tinwheel-systems-0001",
+  "legal_name": "Tinwheel Systems, Inc.",
+  "canonical_home": "https://feed.example.com/tinwheel-systems-0001/manifest.json",
+  "effective_date": "2026-01-01",
+  "roles": {
+    "feed": {
+      "provider": "Example Feed Co.",
+      "uri": "https://feed.example.com/tinwheel-systems-0001/"
+    },
+    "notice_delivery": {
+      "provider": "Example Feed Co.",
+      "uri": "https://feed.example.com/tinwheel-systems-0001/notices"
+    },
+    "conformance_provider": {
+      "provider": "Example Conformance LLC"
+    },
+    "records_custodian": {
+      "provider": "Tinwheel Systems, Inc.",
+      "self_served": true
+    },
+    "proof_framework": {
+      "provider": "SAFR Reporting Standard",
+      "pinned_version": "0.09",
+      "pinned_hash": "sha256:ca28ad7a3d4fcd5ceea7c1c3c9a5ad3e767ca07feb11ecb0b4c43c907295080c"
+    },
+    "sponsor": []
+  }
+}

@@ -1,0 +1,18 @@
+Two licenses apply in this repository.
+
+1. The documents under docs/ (the SAFR agreement and the SAFR Reporting Standard) are licensed
+   under the Creative Commons Attribution 4.0 International license (CC BY 4.0).
+   You are free to share and adapt them for any purpose, including commercially, provided you give
+   appropriate credit, link to the license, and indicate if changes were made.
+   Full text: https://creativecommons.org/licenses/by/4.0/legalcode
+
+   Attribution: "SAFR, the Simple Agreement for Future Redemption, by Legacy Futures
+   Administration LLC, https://safr.vc, licensed CC BY 4.0."
+
+   The SAFR(TM) name and mark are not licensed. They are reserved for the unmodified canonical
+   terms maintained on a conforming data feed. A modified instrument may not be called a SAFR.
+
+2. The schemas under schemas/, the fixtures under fixtures/, and the scripts under scripts/ are
+   licensed under the MIT License. See LICENSE-MIT.
+
+Copyright (c) 2026 Legacy Futures Administration LLC.

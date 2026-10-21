@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safr.vc/schema/manifest/v0.09.json",
+  "title": "SAFR Manifest",
+  "description": "The Manifest per SAFR Reporting Standard Section 7.2: a venture's public, current statement of who serves each operational role for its positions. The Manifest is state, not a document. Each revision is hashed; the current hash rides in the meta of every Quarterly Update; the Manifest names one canonical home, and any copy matching the current hash is authentic. A Manifest is voluntary; a venture without one runs every obligation through written delivery to the notice addresses in its instruments. Holder contact details never appear in a Manifest. License: MIT.",
+  "type": "object",
+  "required": ["schema_version", "venture_id", "canonical_home", "effective_date", "roles"],
+  "properties": {
+    "schema_version": { "type": "string", "const": "0.09" },
+    "venture_id": { "type": "string", "description": "Matches the venture_id in the venture's Quarterly Updates." },
+    "legal_name": { "type": "string" },
+    "canonical_home": { "type": "string", "format": "uri", "description": "The one canonical location of the current Manifest. Every other copy is a mirror, authentic only while its content matches the current hash." },
+    "effective_date": { "type": "string", "format": "date", "description": "The date this revision takes effect, subject to the notice rules of Reporting Standard Section 7.2: a revision changing a delivery channel takes effect for a holder only once notice of it has been delivered through the mechanism in effect before the change." },
+    "prior_hash": { "type": "string", "description": "Content hash (sha256) of the revision this one replaces. Absent on a first Manifest. The chain of prior hashes is the Manifest's history." },
+    "roles": {
+      "type": "object",
+      "description": "The closed role set of Reporting Standard Section 7.2. A role may be served by the venture itself. New roles enter the Standard by versioned amendment, never per venture.",
+      "properties": {
+        "feed": { "$ref": "#/$defs/role_entry", "description": "The conforming Feed: records and serves Quarterly Updates, notices, offers, elections, versions and hashes, and holder notice-detail updates, per Section 7.2." },
+        "notice_delivery": { "$ref": "#/$defs/role_entry", "description": "The declared notice channel. Signature-page addresses remain the fallback of record; a Buyout Notice is always delivered to both." },
+        "attestation_provider": { "$ref": "#/$defs/role_entry", "description": "The third party attesting Ledger Base where an Update or offer carries third-party attestation." },
+        "conformance_provider": { "$ref": "#/$defs/role_entry", "description": "Calibrates the venture's data mapping to the Reporting Standard and runs the conforming computation. Provider identity lives here, never in the canonical documents." },
+        "records_custodian": { "$ref": "#/$defs/role_entry", "description": "The holder of retained detail and holder-tier records." },
+        "proof_framework": { "$ref": "#/$defs/role_entry", "description": "A proof framework the venture reports under, identified by its pinned version and hash (for example, a Pinned Thesis under Proofscaling)." },
+        "sponsor": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/role_entry" },
+          "description": "Sponsors the venture has selected. Zero or more."
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "role_entry": {
+      "type": "object",
+      "required": ["provider"],
+      "properties": {
+        "provider": { "type": "string", "description": "The provider's name, or the venture's own name where the role is self-served." },
+        "self_served": { "type": "boolean", "description": "True where the venture serves this role itself." },
+        "uri": { "type": "string", "format": "uri", "description": "Where this role is served, if it has an address." },
+        "pinned_version": { "type": "string", "description": "Version identifier, where the role points at a versioned artifact." },
+        "pinned_hash": { "type": "string", "description": "Content hash (sha256), where the role points at a pinned artifact." }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
