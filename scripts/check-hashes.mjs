@@ -11,12 +11,12 @@ const pins = (f, label) => {
   return { text, found };
 };
 
-const standard = sha("docs/SAFR-Reporting-Standard-v0_09.md");
-const schema = sha("schemas/safr-reporting-standard-schema-v0_09.json");
-const manifest = sha("schemas/safr-manifest-schema-v0_09.json");
+const standard = sha("docs/SAFR-Reporting-Standard-v1_0.md");
+const schema = sha("schemas/safr-reporting-standard-schema-v1_0.json");
+const manifest = sha("schemas/safr-manifest-schema-v1_0.json");
 
-const agreement = pins("docs/SAFR-v0_09.md", "agreement");
-const std = pins("docs/SAFR-Reporting-Standard-v0_09.md", "standard");
+const agreement = pins("docs/SAFR-v1_0.md", "agreement");
+const std = pins("docs/SAFR-Reporting-Standard-v1_0.md", "standard");
 
 const problems = [];
 if (!agreement.found.includes(standard)) problems.push(`agreement pins ${agreement.found.join(", ")}; the Reporting Standard is ${standard}`);

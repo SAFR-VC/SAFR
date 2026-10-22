@@ -1,12 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://safr.vc/schema/manifest/v0.09.json",
+  "$id": "https://safr.vc/schema/manifest/v1.0.json",
   "title": "SAFR Manifest",
   "description": "The Manifest per SAFR Reporting Standard Section 7.2: a venture's public, current statement of who serves each operational role for its positions. The Manifest is state, not a document. Each revision is hashed; the current hash rides in the meta of every Quarterly Update; the Manifest names one canonical home, and any copy matching the current hash is authentic. A Manifest is voluntary; a venture without one runs every obligation through written delivery to the notice addresses in its instruments. Holder contact details never appear in a Manifest. License: MIT.",
   "type": "object",
   "required": ["schema_version", "venture_id", "canonical_home", "effective_date", "roles"],
   "properties": {
-    "schema_version": { "type": "string", "const": "0.09" },
+    "schema_version": { "type": "string", "const": "1.0" },
     "venture_id": { "type": "string", "description": "Matches the venture_id in the venture's Quarterly Updates." },
     "legal_name": { "type": "string" },
     "canonical_home": { "type": "string", "format": "uri", "description": "The one canonical location of the current Manifest. Every other copy is a mirror, authentic only while its content matches the current hash." },

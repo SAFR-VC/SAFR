@@ -15,10 +15,11 @@ The site, with the user guide, the comparison, and a browser tool that fills the
 
 | Path | What it is | License |
 | --- | --- | --- |
-| `docs/SAFR-v0_09.md` | The agreement, canonical form v0.09 | CC BY 4.0 |
-| `docs/SAFR-Reporting-Standard-v0_09.md` | The Reporting Standard, major version 0, v0.09: Ledger Base, Expected Capacity, the quarterly cycle, attestation grades, governance | CC BY 4.0 |
-| `schemas/safr-reporting-standard-schema-v0_09.json` | JSON Schema (draft-07) for a Quarterly Update | MIT |
-| `schemas/safr-manifest-schema-v0_09.json` | JSON Schema (2020-12) for a venture's Manifest: who serves each operational role | MIT |
+| `docs/SAFR-v1_0.md` | The agreement, canonical form v1.0 | CC BY 4.0 |
+| `docs/SAFR-Reporting-Standard-v1_0.md` | The Reporting Standard, major version 1, v1.0: Ledger Base, Expected Capacity, the quarterly cycle, attestation grades, governance | CC BY 4.0 |
+| `docs/SAFR-v1_0-redline-from-v0_09.md` | Every change from v0.09 to 1.0, in full, with the clause it sits in. Not canonical and not hashed | CC BY 4.0 |
+| `schemas/safr-reporting-standard-schema-v1_0.json` | JSON Schema (draft-07) for a Quarterly Update | MIT |
+| `schemas/safr-manifest-schema-v1_0.json` | JSON Schema (2020-12) for a venture's Manifest: who serves each operational role | MIT |
 | `fixtures/` | Conforming sample documents that validate against the schemas | MIT |
 | `scripts/check-hashes.mjs` | Recomputes the content hashes the documents pin and fails if any has drifted | MIT |
 
@@ -39,22 +40,39 @@ a reader knows the mirror is the canonical text.
 
 ```bash
 npx ajv-cli@5 validate --spec=draft7 \
-  -s schemas/safr-reporting-standard-schema-v0_09.json \
-  -d fixtures/quarterly-update-v0_09.tinwheel-q1-2026.json
+  -s schemas/safr-reporting-standard-schema-v1_0.json \
+  -d fixtures/quarterly-update-v1_0.tinwheel-q1-2026.json
 ```
 
-The fixture is the worked example used across safr.vc: Tinwheel Systems, a fictitious Delaware
-corporation on the Fixed Pool schedule, for the quarter ending March 31, 2026. Its figures are
-internally consistent under the Standard (Ledger Base $1,201,000; Expected Capacity $37,000;
-Declared Budget $25,000 with a variance note).
+Both fixtures are the worked example used across safr.vc: Tinwheel Systems, a fictitious Delaware C
+corporation on the Fixed Pool schedule. Its figures are internally consistent under the Standard
+(Ledger Base $1,201,000; Expected Capacity $37,000).
+
+`quarterly-update-v1_0.tinwheel-q1-2026.json` is an ordinary quarter, with a position past its
+Election Date: `meta.declared_budget_applicable` is true, so the Update carries a Declared Budget of
+$25,000 and a variance note explaining the gap to Expected Capacity.
+
+`quarterly-update-v1_0.tinwheel-pre-election-date.json` is a quarter where no outstanding position
+has reached its Election Date. The flag is false, so the Update carries no Declared Budget and no
+variance note, while Expected Capacity still publishes. Together the two fixtures pin both branches
+of the conditional, which is the part of the schema a reader is most likely to implement wrongly.
 
 ## Versions
 
-The current canonical set is **v0.09**. Refinements within major version 0 apply to outstanding
-positions automatically; a new major version, defined in the Standard as any change that would move
-a previously issued position's computed Ledger Base or Expected Capacity for any quarter by more
-than 3%, applies to an outstanding instrument only with both parties' consent. Superseded versions
-are not published here; the hash in an executed agreement identifies the text it was signed under.
+The current canonical set is **v1.0**, major version 1. It moves the Quarterly Update to the first
+fiscal quarter on or after a position's Closing Date, so a position reports from the start of its
+life rather than after its month 36. `docs/SAFR-v1_0-redline-from-v0_09.md` sets out every change.
+
+Refinements within a major version apply to outstanding positions automatically. A new major version
+applies to an outstanding instrument only with both parties' consent, and the Standard defines one as
+any change that would move a previously issued position's computed Ledger Base, Expected Capacity or
+claim value for any quarter by more than 3% — or, as of 1.0, any change that would make a conforming
+Feed non-conforming, whatever the 3% test says. The 1.0 data schema makes a v0.09 Feed non-conforming,
+which is what makes 1.0 a major version. No position was executed on v0.09, so nothing was
+re-papered.
+
+Superseded versions are not published here; the hash in an executed agreement identifies the text it
+was signed under.
 
 ## Proposals and issues
 

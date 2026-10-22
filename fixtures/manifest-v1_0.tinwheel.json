@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.09",
+  "schema_version": "1.0",
   "venture_id": "tinwheel-systems-0001",
   "legal_name": "Tinwheel Systems, Inc.",
   "canonical_home": "https://feed.example.com/tinwheel-systems-0001/manifest.json",

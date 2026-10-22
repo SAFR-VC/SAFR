@@ -1,21 +1,22 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://safr.vc/schema/quarterly-update/v0.09.json",
+  "$id": "https://safr.vc/schema/quarterly-update/v1.0.json",
   "title": "SAFR Reporting Standard: Quarterly Update",
-  "description": "Canonical quarterly payload for the SAFR Reporting Standard, schema version 0.09 (major version 0). One coherent schema: attestation is a conditional layer within it, not a separate document. When meta.attestation_grade is 2, the attestation object is required; at grade 1 it is absent. Field-level x-tier marks distribution: 'visible' fields flow to the Visibility tier (invitational, need-to-know; never a public listing); 'holder' fields flow to the Holder tier only. The raw ledger never leaves the venture; only this schema-shaped output does, by the venture's standing grant. Calculations are defined in the SAFR Reporting Standard spec; x-canonical-constants below mirrors the controlling numbers for machine use. License: MIT.",
+  "description": "Canonical quarterly payload for the SAFR Reporting Standard, schema version 1.0 (major version 1). One coherent schema: attestation is a conditional layer within it, not a separate document. When meta.attestation_grade is 2, the attestation object is required; at grade 1 it is absent. Field-level x-tier marks distribution: 'visible' fields flow to the Visibility tier (invitational, need-to-know; never a public listing); 'holder' fields flow to the Holder tier only. The raw ledger never leaves the venture; only this schema-shaped output does, by the venture's standing grant. Calculations are defined in the SAFR Reporting Standard spec; x-canonical-constants below mirrors the controlling numbers for machine use. License: MIT.",
   "type": "object",
   "required": ["meta", "balance", "development", "revenue_streams", "cashflow_ttm", "computed", "quarter"],
   "properties": {
     "meta": {
       "type": "object",
       "x-tier": "visible",
-      "required": ["schema_version", "venture_id", "fiscal_quarter_end", "issued_at", "attestation_grade", "currency", "tax_classification", "elected_schedule"],
+      "required": ["schema_version", "venture_id", "fiscal_quarter_end", "issued_at", "attestation_grade", "currency", "tax_classification", "elected_schedule", "declared_budget_applicable"],
       "properties": {
-        "schema_version": { "type": "string", "const": "0.09" },
+        "schema_version": { "type": "string", "const": "1.0" },
         "manifest_hash": { "type": "string", "description": "Content hash (sha256) of the venture's current Manifest as of this quarter-end, per Reporting Standard Section 7.2. Present if and only if the venture has posted a Manifest. A copy of the Manifest is authentic only if its content matches this hash." },
-        "tax_classification": { "type": "string", "enum": ["corporation", "partnership", "other"], "description": "The venture's U.S. federal income tax classification as of the quarter-end. 'partnership' means any entity so taxed, whatever its form, including a trust or series. Selects the applicable Conversion Declaration exhibit for a Conversion Offer issued with this Update (instrument Section 5(e)), and makes any change of classification visible to every holder in the quarter it occurs. A change of classification alone is not a Change of Economic Control (instrument Section 5(d)(iii))." },
+        "tax_classification": { "type": "string", "enum": ["c_corporation", "partnership", "other"], "description": "The venture's U.S. federal income tax classification as of the quarter-end. 'c_corporation' is the only corporate value: the canonical form is not designed for an S corporation, whose one-class-of-stock rule the characterization in instrument Section 8(j)(i) would put at risk. 'partnership' means any entity so taxed, whatever its form, including a trust or series. Selects the applicable Conversion Declaration exhibit for a Conversion Offer issued with this Update (instrument Section 5(e)), and makes any change of classification visible to every holder in the quarter it occurs. A change of classification alone is not a Change of Economic Control (instrument Section 5(d)(iii))." },
         "elected_schedule": { "type": "string", "enum": ["fixed_pool", "direct_ledger"], "description": "The Schedule elected on the first page of the instrument. Fixed for the life of the position and independent of tax_classification: either Schedule may be elected by an entity of either classification. One Schedule per venture: every outstanding position of the venture carries the same election, and an issuer running both Schedules does so through distinct ventures, each with its own venture_id and Feed." },
-        "major_version": { "type": "integer", "const": 0 },
+        "declared_budget_applicable": { "type": "boolean", "description": "Whether the instrument provides for a Declared Budget in this quarter. Under the SAFR canonical form this is true in any quarter in which an outstanding position has reached its Election Date. A host instrument that provides for a Declared Budget from its first Update sets it true throughout. Asserted by the venture as a fact about its instrument rather than computed from the Feed: no figure in this schema depends on it." },
+        "major_version": { "type": "integer", "const": 1 },
         "venture_id": { "type": "string" },
         "legal_name": { "type": "string", "x-tier": "visible" },
         "fiscal_quarter_end": { "type": "string", "format": "date", "description": "The fiscal quarter-end this update covers (Mar 31, Jun 30, Sep 30, or Dec 31). The reference data period is the trailing twelve months ending on this date." },
@@ -110,7 +111,6 @@
     "quarter": {
       "type": "object",
       "x-tier": "visible",
-      "required": ["declared_budget"],
       "properties": {
         "declared_budget": { "type": "number", "minimum": 0, "description": "The venture's decision for this quarter's settlement. Zero is valid and is not default." },
         "variance_note": { "type": ["string", "null"], "description": "Required when declared_budget < expected_capacity; states why capital is being retained." },
@@ -127,7 +127,8 @@
           "type": ["object", "null"],
           "properties": {
             "noticed_amount": { "type": "number", "minimum": 0 },
-            "convert_instead_amount": { "type": "number", "minimum": 0 }
+            "convert_instead_amount": { "type": "number", "minimum": 0 },
+            "cash_settled": { "type": "number", "minimum": 0, "description": "Paid in cash on a Buyout settled this quarter, as distinct from the amount noticed. Where the venture is a C corporation and a position is treated as stock under instrument Section 8(j)(i), this is a purchase by the Company of its own stock for Section 1202(c)(3) purposes." }
           }
         },
         "conversions": {
@@ -137,6 +138,7 @@
             "shares_or_units_issued": { "type": "number", "minimum": 0 }
           }
         },
+        "other_repurchases": { "type": "number", "minimum": 0, "description": "Every other purchase by the venture of its own equity settled this quarter, including repurchases from departing service providers at cost under instrument Section 7(a). Counts with queue.paid_this_quarter and buyout_notice.cash_settled toward the Section 1202(c)(3) test where the venture is a C corporation." },
         "headcount_band": { "type": "string", "enum": ["1-5", "6-10", "11-25", "26-50", "51-100", "100+"] },
         "commentary": { "type": "string", "maxLength": 2000, "description": "Brief management commentary. No PII, no customer or counterparty identities, no partner names, no pipeline detail." }
       }
@@ -171,6 +173,25 @@
       },
       "then": { "required": ["attestation"] },
       "else": { "not": { "required": ["attestation"] } }
+    },
+    {
+      "if": {
+        "properties": { "meta": { "properties": { "declared_budget_applicable": { "const": true } } } },
+        "required": ["meta"]
+      },
+      "then": {
+        "properties": { "quarter": { "required": ["declared_budget"] } }
+      },
+      "else": {
+        "properties": {
+          "quarter": {
+            "allOf": [
+              { "not": { "required": ["declared_budget"] } },
+              { "not": { "required": ["variance_note"] } }
+            ]
+          }
+        }
+      }
     }
   ],
   "x-canonical-constants": {

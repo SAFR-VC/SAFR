@@ -1,0 +1,226 @@
+{
+  "meta": {
+    "schema_version": "1.0",
+    "major_version": 1,
+    "venture_id": "tinwheel-systems-0001",
+    "legal_name": "Tinwheel Systems, Inc.",
+    "tax_classification": "c_corporation",
+    "elected_schedule": "fixed_pool",
+    "fiscal_quarter_end": "2026-03-31",
+    "issued_at": "2026-05-08T16:00:00Z",
+    "attestation_grade": 1,
+    "currency": "USD",
+    "reporting_lapse_cured": false,
+    "declared_budget_applicable": true
+  },
+  "balance": {
+    "cash": 520000,
+    "accounts_receivable": 96000,
+    "inventory": 74000,
+    "equipment_net": 120000,
+    "other_tangible": 0,
+    "total_liabilities": 190000
+  },
+  "development": {
+    "monthly_qualified_dev_spend": [
+      {
+        "month_offset": 0,
+        "amount": 6000
+      },
+      {
+        "month_offset": 1,
+        "amount": 6000
+      },
+      {
+        "month_offset": 2,
+        "amount": 6000
+      },
+      {
+        "month_offset": 3,
+        "amount": 6000
+      },
+      {
+        "month_offset": 4,
+        "amount": 6000
+      },
+      {
+        "month_offset": 5,
+        "amount": 6000
+      },
+      {
+        "month_offset": 6,
+        "amount": 6000
+      },
+      {
+        "month_offset": 7,
+        "amount": 6000
+      },
+      {
+        "month_offset": 8,
+        "amount": 6000
+      },
+      {
+        "month_offset": 9,
+        "amount": 6000
+      },
+      {
+        "month_offset": 10,
+        "amount": 6000
+      },
+      {
+        "month_offset": 11,
+        "amount": 6000
+      },
+      {
+        "month_offset": 12,
+        "amount": 6000
+      },
+      {
+        "month_offset": 13,
+        "amount": 6000
+      },
+      {
+        "month_offset": 14,
+        "amount": 6000
+      },
+      {
+        "month_offset": 15,
+        "amount": 6000
+      },
+      {
+        "month_offset": 16,
+        "amount": 6000
+      },
+      {
+        "month_offset": 17,
+        "amount": 6000
+      },
+      {
+        "month_offset": 18,
+        "amount": 6000
+      },
+      {
+        "month_offset": 19,
+        "amount": 6000
+      },
+      {
+        "month_offset": 20,
+        "amount": 6000
+      },
+      {
+        "month_offset": 21,
+        "amount": 6000
+      },
+      {
+        "month_offset": 22,
+        "amount": 6000
+      },
+      {
+        "month_offset": 23,
+        "amount": 6000
+      },
+      {
+        "month_offset": 24,
+        "amount": 6000
+      },
+      {
+        "month_offset": 25,
+        "amount": 6000
+      },
+      {
+        "month_offset": 26,
+        "amount": 6000
+      },
+      {
+        "month_offset": 27,
+        "amount": 6000
+      },
+      {
+        "month_offset": 28,
+        "amount": 6000
+      },
+      {
+        "month_offset": 29,
+        "amount": 6000
+      },
+      {
+        "month_offset": 30,
+        "amount": 6000
+      },
+      {
+        "month_offset": 31,
+        "amount": 6000
+      },
+      {
+        "month_offset": 32,
+        "amount": 6000
+      },
+      {
+        "month_offset": 33,
+        "amount": 6000
+      },
+      {
+        "month_offset": 34,
+        "amount": 6000
+      },
+      {
+        "month_offset": 35,
+        "amount": 6000
+      }
+    ]
+  },
+  "revenue_streams": [
+    {
+      "quality": "recurring",
+      "is_signed_contract": true,
+      "is_dedicated_asset_contract": false,
+      "term_at_signing_months": 12,
+      "annual_contracted_amount": 220000,
+      "ttm_amount": 220000
+    },
+    {
+      "quality": "one_time",
+      "is_signed_contract": false,
+      "is_dedicated_asset_contract": false,
+      "term_at_signing_months": 0,
+      "annual_contracted_amount": 0,
+      "ttm_amount": 120000
+    }
+  ],
+  "cashflow_ttm": {
+    "free_cash_flow": 148000,
+    "operating_expenses_monthly_avg": 16000
+  },
+  "computed": {
+    "ledger_base": {
+      "tangible_net_assets": 620000,
+      "qualified_development_asset": 111000,
+      "forward_revenue_value": 470000,
+      "total": 1201000
+    },
+    "fully_diluted_units": 7500000,
+    "ledger_base_per_fd_unit": 0.160133,
+    "working_capital_floor": 96000,
+    "expected_capacity": 37000
+  },
+  "quarter": {
+    "declared_budget": 25000,
+    "variance_note": "Held $12,000 below Expected Capacity to fund the second production line ordered in February.",
+    "queue": {
+      "requests_outstanding_amount": 0,
+      "paid_this_quarter": 0,
+      "amount_retired": 0,
+      "insider_positions_present": false
+    },
+    "buyout_notice": null,
+    "conversions": {
+      "amount_converted": 0,
+      "shares_or_units_issued": 0
+    },
+    "headcount_band": "6-10",
+    "commentary": "Recurring revenue grew with two renewals at higher tiers. No redemption queue is open yet; positions are inside month 36."
+  },
+  "holder_lines": {
+    "owners_and_leaders_total_ttm": 140000
+  }
+}
