@@ -61,7 +61,7 @@ Major version 1, and the content hash of the 1.0 Reporting Standard.
 
 **1.0**
 
-> **Pinned Reporting Standard:** SAFR Reporting Standard, major version 1, content hash sha256:f3d2d8505314e807741c69b640ef850019c99a8b8ca4ed7afc75a5e8c4fd4abeecb0b4c43c907295080c (the “**Reporting Standard**”; see Section 8(i)).
+> **Pinned Reporting Standard:** SAFR Reporting Standard, major version 1, content hash sha256:f3d2d8505314e807741c69b640ef850019c99a8b8ca4ed7afc75a5e8c4fd4abe (the “**Reporting Standard**”; see Section 8(i)).
 
 ### 4. First page, the recorded classification
 
